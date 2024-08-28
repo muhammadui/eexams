@@ -2,22 +2,22 @@
 
 ## 1. Project Setup
 
-- [ ] Create new React project using Create React App
-- [ ] Set up routing with React Router
-- [ ] Install necessary dependencies (Axios, Material-UI)
-- [ ] Set up folder structure (components, pages, services, etc.)
+- [x] Create new React project using Vite
+- [x] Set up routing with React Router
+- [x] Install necessary dependencies (TailwindCSS, Shadcn UI)
+- [x] Set up folder structure (components, pages, services, etc.)
 
 ## 2. User Authentication Components
 
 ### 2.1 Login Page
 
-- [ ] Create Login component
-- [ ] Email/Student ID input field
-- [ ] Password input field
-- [ ] User type toggle (Student/Instructor)
-- [ ] "Login" button
-- [ ] "Forgot Password" link
-- [ ] Error handling for invalid credentials
+- [x] Create Login component
+- [x] Email/Student ID input field
+- [x] Password input field
+- [x] User type toggle (Student/Instructor)
+- [x] "Login" button
+- [x] "Forgot Password" link
+- [x] Error handling for invalid credentials
 - [ ] Loading state during authentication
 - [ ] Redirect to appropriate dashboard on successful login
 
@@ -36,13 +36,13 @@
 
 ### 2.3 Password Reset Page
 
-- [ ] Create Password Reset component
-- [ ] Email input field for reset request
-- [ ] "Send Reset Link" button
+- [x] Create Password Reset component
+- [x] Email input field for reset request
+- [x] "Send Reset Link" button
 - [ ] Confirmation message for reset link sent
-- [ ] New Password input field (after clicking reset link)
+- [x] New Password input field (after clicking reset link)
 - [ ] Confirm New Password input field
-- [ ] "Reset Password" button
+- [] "Reset Password" button
 - [ ] Error handling for reset failures
 - [ ] Success message and redirect on successful reset
 
