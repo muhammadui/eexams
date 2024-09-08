@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -19,14 +19,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const newPasswordSchema = z.object({
-  confirm_password: z.string(),
-  password: z.string(),
-});
+const newPasswordSchema = z
+  .object({
+    confirm_password: z.string(),
+    password: z.string(),
+  })
+  .refine((values) => values.password === values.confirm_password, {
+    message: "Passwords don't match",
+    path: ["confirm_password"], // This sets which field the error is attached to
+  });
+// newPasswordSchema.parse({ password: "asdf", confirm: "qwer" });
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof newPasswordSchema>>({
@@ -36,30 +42,10 @@ export function LoginForm() {
       password: "",
     },
   });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof newPasswordSchema>) {
-    try {
-      const response = await fetch("http://localhost:5000/api/admins/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
-
-      const data = await response.json();
-      console.log("Login successful", data);
-      localStorage.setItem("token", data.token); // Save token to local storage
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Login failed", error);
-      setError("Invalid confirm_password or password. Please try again.");
-    }
+    console.log(values.confirm_password);
   }
 
   return (
@@ -72,7 +58,7 @@ export function LoginForm() {
           <img src="baze-logo.png" className="w-28 lg:w-40" alt="" />
         </div>
         <p className="text-2xl font-semibold">Create new password</p>
-        {error && <p className="animate-pulse text-sm text-red-500">{error}</p>}
+        <FormMessage />
 
         <FormField
           control={form.control}
