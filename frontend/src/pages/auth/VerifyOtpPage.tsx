@@ -54,6 +54,7 @@ export function VerifyOTPForm() {
       if (!response.ok) {
         throw new Error("Login failed");
       }
+      setIsVerifying(true);
 
       const data = await response.json();
       console.log("Login successful", data);
