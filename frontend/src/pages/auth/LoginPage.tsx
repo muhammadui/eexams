@@ -139,7 +139,7 @@ export function LoginForm() {
           Sign in
         </Button>
         <div className="flex items-center justify-end gap-2 text-blue-700 hover:cursor-pointer">
-          <NavLink className={`text-sm`} to={"/forgot-password"}>
+          <NavLink className={`text-sm`} to={"/auth/forgot-password"}>
             {" "}
             forgot password
           </NavLink>

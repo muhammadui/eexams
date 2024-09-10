@@ -37,7 +37,7 @@ export function ResetPasswordForm() {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
     try {
-      const response = await fetch("http://localhost:5000/api/admins/login", {
+      const response = await fetch("", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export function ResetPasswordForm() {
           Reset Password
         </Button>
         <div className="flex items-center justify-end gap-2 text-blue-700 hover:cursor-pointer">
-          <NavLink className={`text-sm`} to={"/"}>
+          <NavLink className={`text-sm`} to={"/auth/login"}>
             {" "}
             login
           </NavLink>

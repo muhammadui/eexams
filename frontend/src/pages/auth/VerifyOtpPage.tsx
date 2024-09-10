@@ -22,6 +22,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Loader2 } from "lucide-react";
 
 const otpSchema = z.object({
   otp: z.string(),
@@ -29,6 +30,7 @@ const otpSchema = z.object({
 
 export function VerifyOTPForm() {
   const [error, setError] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof otpSchema>>({
@@ -56,10 +58,11 @@ export function VerifyOTPForm() {
       const data = await response.json();
       console.log("Login successful", data);
       localStorage.setItem("token", data.token); // Save token to local storage
-      navigate("/dashboard");
+      navigate("/reset-password");
     } catch (error) {
       console.error("Login failed", error);
-      setError("Invalid otp or password. Please try again.");
+      console.log(values);
+      setError("Network error, Please try again.");
     }
   }
 
@@ -75,7 +78,7 @@ export function VerifyOTPForm() {
 
         <p className="text-2xl font-semibold">Verify OTP</p>
         <p>Please Enter OPT code sent to your email address</p>
-        {error && <p className="animate-pulse text-sm text-red-500">{error}</p>}
+        {error && <p className="text-sm text-red-500">{error}</p>}
 
         <FormField
           control={form.control}
@@ -101,9 +104,20 @@ export function VerifyOTPForm() {
           )}
         />
 
-        <Button type="submit" className="w-full bg-[#0f3376] text-white">
-          Verify
-        </Button>
+        {isVerifying ? (
+          <Button
+            type="submit"
+            className="w-full cursor-not-allowed gap-2 bg-[#0f3376] text-white"
+          >
+            <Loader2 className="animate-spin" />
+            Verifying OTP Code
+          </Button>
+        ) : (
+          <Button type="submit" className="w-full bg-[#0f3376] text-white">
+            Verify
+          </Button>
+        )}
+
         <div className="flex items-center justify-between gap-2 text-blue-700 hover:cursor-pointer">
           <NavLink className={`text-sm`} to={"/resend-otp"}>
             Resend Code

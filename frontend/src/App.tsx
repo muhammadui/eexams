@@ -1,22 +1,38 @@
 import {
+  Navigate,
+  Route,
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate,
 } from "react-router-dom";
-import LoginPage from "./pages/auth/LoginPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+import LoginPage from "./pages/auth/LoginPage";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 import VerifyOtpPage from "./pages/auth/VerifyOtpPage";
+import Accommodation from "./pages/dashboard/Accommodation";
+import Courses from "./pages/dashboard/Courses";
+import Dashboard from "./pages/dashboard/Dashboard";
+import DashboardHome from "./pages/dashboard/DashboardHome";
+import Exams from "./pages/dashboard/Exams";
+import Fees from "./pages/dashboard/Fees";
+import Profile from "./pages/dashboard/Profile";
+import Result from "./pages/dashboard/Result";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Redirect root to login page */}
         <Route path="/" element={<Navigate to="/auth/login" replace />} />
 
-        {/* Auth routes */}
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route index element={<DashboardHome />} />
+          <Route path="fees" element={<Fees />} />
+          <Route path="courses" element={<Courses />} />
+          <Route path="accommodation" element={<Accommodation />} />
+          <Route path="exams" element={<Exams />} />
+          <Route path="result" element={<Result />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
+
         <Route path="/auth">
           <Route path="login" element={<LoginPage />} />
           <Route path="forgot-password" element={<ForgotPasswordPage />} />
@@ -24,9 +40,6 @@ const App = () => {
           <Route path="reset-password" element={<ResetPasswordPage />} />
         </Route>
 
-        {/* Add other routes here */}
-
-        {/* Catch-all route for 404 */}
         <Route path="*" element={<Navigate to="/auth/login" replace />} />
       </Routes>
     </Router>

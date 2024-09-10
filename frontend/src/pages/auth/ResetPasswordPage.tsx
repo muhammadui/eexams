@@ -30,7 +30,7 @@ const newPasswordSchema = z
   });
 // newPasswordSchema.parse({ password: "asdf", confirm: "qwer" });
 
-export function LoginForm() {
+export function ResetPasswordForm() {
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   // const [error, setError] = useState("");
 
@@ -45,6 +45,7 @@ export function LoginForm() {
   // const navigate = useNavigate();
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof newPasswordSchema>) {
+    // Todo - make api call to backend and redirect student to dashboard after  a success creation of new password - redirect him to login
     console.log(values.confirm_password);
   }
 
@@ -146,7 +147,7 @@ export default function ResetPasswordPage() {
     <>
       <section className="login__page flex h-screen">
         <div className="left__login__section flex w-full items-center justify-center bg-[url('assets/mobile-bg.svg')] bg-auto bg-center bg-no-repeat bg-blend-overlay md:bg-none xl:w-2/5">
-          <LoginForm />
+          <ResetPasswordForm />
         </div>
         <div className="right__login__section relative hidden h-screen w-screen bg-[#1546a3] bg-cover bg-no-repeat xl:flex">
           {/* <img src="assets/main-bg.svg" alt="" className="object-cover" /> */}
