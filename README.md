@@ -11,7 +11,6 @@
 ### 2.1 Login Page
 
 - A form where students and instructors can log in using their email and password
-- Toggle between student and instructor login
 - "Forgot Password" link
 
 ### 2.2 Registration Page
